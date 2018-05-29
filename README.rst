@@ -32,8 +32,6 @@ Simulator Commands
 Codes
 ==============================================================================
 
-**src/QuadControl.cpp**
-
 ::
 
     drone-controller/
@@ -41,9 +39,24 @@ Codes
           +---- config/              configuration files for controller and vehicle
           +---- lib/                 external libraries
           +---- project/             IDE configurations
-          +---- src/
+          +---- src/                 codes
           +---- CMakeLists.txt
           +---- README.rst
+
+Function Calls:
+
+::
+
+    main.cpp
+       +---- Utility/SimpleConfig.h
+       +---- Drawing/Visualizer_GLUT.h
+       +                +---- Simulation/QuadDynamics.h
+       +                               +---- ControllerFactory.h
+       +                                           +---- QuadControl.h
+       +                                                       +---- BaseController.h
+       +                                                       +          +---- VehicleDatatypes.h
+       +                                                       +---- Trajectory.h
+       +---- Drawing/GraphManager.h
 
 ==============================================================================
 Authors
