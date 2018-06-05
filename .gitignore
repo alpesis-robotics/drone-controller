@@ -27,11 +27,5 @@ bld/
 # manual cmake build ignores
 _build/
 
-# OS
+# osx
 .DS_Store
-
-# Vim
-*.swo
-*.swp
-*.swm
-*.swn
