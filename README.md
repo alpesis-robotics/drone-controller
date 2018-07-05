@@ -18,20 +18,23 @@ $ ./CPPSim
 
 ## Solution: Scenario 1_Intro
 
-Tuning the param: mass:
-
-```
-# start the simulator
-$ ./CPPSim
-
-# tuning the param on QuadControlParams.txt
-$ vim config/QuadControlParams.txt
-```
-
-``config/QuadControlParams.txt``: final result
+Tuning the parameter ``Mass`` in the ``config/QuadControlParams.txt``:
 
 ```
 Mass = 0.5
 ```
+
+Run the result:
+
+```
+Simulation #1 (../config/1_Intro.txt)
+Simulation #2 (../config/1_Intro.txt)
+PASS: ABS(Quad.PosFollowErr) was less than 0.500000 for at least 0.800000 seconds
+```
+
+The chart will be shown as below:
+
+![01_Intro](./images/01_Intro.png)
+
 
 ## Solution: Scenario 2_AttitudeControl
