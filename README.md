@@ -34,7 +34,7 @@ PASS: ABS(Quad.PosFollowErr) was less than 0.500000 for at least 0.800000 second
 
 The chart will be shown as below:
 
-![01_Intro](./images/01_Intro.png)
+![1_Intro](./images/1_Intro.png)
 
 
 ## Solution: Scenario 2_AttitudeControl
