@@ -169,5 +169,79 @@ same time, the vehicle is flying away slowly.
 
 ## Solution: Scenario 3_PositionControl
 
+**Lateral Position Control**
+
+![equation](./images/lateral_position_control_velocity.gif)
+
+![equation](./images/lateral_position_control_acceleration.gif)
+
+**Altitude Control**
+
+![equation](./images/altitude_control.gif)
+
+**Yaw Control**
+
+![equation](./images/yaw_control.gif)
+
 ### Implementation
 
+**Lateral PositionControl**
+
+Codes implemented in ``LateralPositionControl()``:
+
+```
+```
+
+**Altitude Control**
+
+Codes implemented in ``AltitudeControl()``:
+
+```
+```
+
+Tuning the parameters ``kpPosXY``, ``kpPosZ``, ``kpVelXY``, ``kpVelZ`` in ``config/QuadControlParams.txt``:
+
+```
+# Position control gains
+kpPosXY = 4
+kpPosZ = 4
+
+# Velocity control gains
+ kpVelXY = 8
+ kpVelZ = 8
+```
+
+Run the result:
+
+```
+Simulation #45 (../config/3_PositionControl.txt)
+PASS: ABS(Quad1.Pos.X) was less than 0.100000 for at least 1.250000 seconds
+PASS: ABS(Quad2.Pos.X) was less than 0.100000 for at least 1.250000 seconds
+FAIL: ABS(Quad2.Yaw) was less than 0.100000 for 0.000000 seconds, which was less than 1.000000 seconds
+```
+
+![3_PositionControl_step1](./images/3_PositionControl_step1.png)
+
+**Yaw Control**
+
+Codes implemented in ``YawControl()``:
+
+```
+
+```
+
+Tuning the parameters
+
+```
+```
+
+Run the result:
+
+```
+Simulation #78 (../config/3_PositionControl.txt)
+PASS: ABS(Quad1.Pos.X) was less than 0.100000 for at least 1.250000 seconds
+PASS: ABS(Quad2.Pos.X) was less than 0.100000 for at least 1.250000 seconds
+PASS: ABS(Quad2.Yaw) was less than 0.100000 for at least 1.000000 seconds
+```
+
+![3_PositionControl](./images/3_PositionControl.png)
