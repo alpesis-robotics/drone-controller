@@ -1,0 +1,20 @@
+\\\text{Moment at body frame}
+\\\\
+\begin{bmatrix} M_x \\ M_y \\ M_z\end{bmatrix}=
+\begin{bmatrix} 
+I_{xx}\dot \omega_p \\
+I_{yy}\dot \omega_q \\
+I_{zz}\dot \omega_r 
+\end{bmatrix} =
+\begin{bmatrix} 
+I_{xx} k_p (p_d - p) \\
+I_{yy} k_q (q_d - q) \\
+I_{zz} k_r (r_d - r)
+\end{bmatrix}
+\\\\\\
+\text{Notations:}\\
+M(x, y, z): \text{moment} \\
+I(I_{xx}, I_{yy}, I_{zz}): \text{moment of inertia} \\
+k(p, q, r): \text{angular rate gains} \\
+(p, q, r): \text{body rates}
+

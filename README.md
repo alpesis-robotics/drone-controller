@@ -48,15 +48,19 @@ and the moment at the body frame;
 
 **Motor Control**
 
-
+As known that the relation of the torque (x, y, z), the collective thrust and the forces of
+each rotor, resolve the desired force for each single rotor by the equations as
 
 ![equation](./images/generate_motor_control.gif)
 
 **Body Rate Control**
 
-![equation](./images/body_rate_control.gif)
+Solving the ``momentCmd`` by the formulas as:
 
 **Roll Pitch Control**
+
+In order to get the angular velocity of roll and pitch, it needs the rotation matrix from
+estimated attitude to tranform the result from world frame to body frame.
 
 ![equation](./images/roll_pitch_control.gif)
 
@@ -107,6 +111,12 @@ Tunning the parameter ``kpPQR`` in ``config/QuadControlParams.txt``:
 kpPQR = 92, 92, 20
 ```
 
+At this stage, run the result, tuning the angle rate gains, the chart is shown as
+below. We could see the ``omega.x`` is getting colsed to 0, and the vehicle flies
+off quickly.
+
+![2_AttitudeControl_step1](./images/2_AttitudeControl_step1.png)
+
 **RollPitchControl**
 
 Codes implemented in ``RollPitchControl()``:
@@ -149,6 +159,8 @@ PASS: ABS(Quad.Roll) was less than 0.025000 for at least 0.750000 seconds
 PASS: ABS(Quad.Omega.X) was less than 2.500000 for at least 0.750000 seconds
 ```
 
-The chart is shown as 
+Completed the roll and pitch control function, and fine tuned the angle control gain
+``kpBank``, the roll value is getting closed to 0 at the first graph as shown, at the
+same time, the vehicle is flying away slowly. 
 
 ![2_AttitudeControl](./images/2_AttitudeControl.png)
