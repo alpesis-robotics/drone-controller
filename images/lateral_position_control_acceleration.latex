@@ -1,0 +1,20 @@
+\\
+\text{Acceleration:}\\
+\\
+\begin{bmatrix}a_x(t) \\ a_y(t)\end{bmatrix}=
+\begin{bmatrix}a_x(t-1) \\ a_y(t-1)\end{bmatrix} +
+k_p^{\text{velXY}}
+(
+\begin{bmatrix}v_x^{\text{desired}}(t) \\ v_y^{\text{desired}}(t)\end{bmatrix} -
+\begin{bmatrix}v_x(t) \\ v_y(t)\end{bmatrix}
+)
+\\
+\\\\
+\text{If} \sqrt {a_x^2(t) + a_y^2(t)} > \text{maxAccelXY} \text{,}\\
+\begin{bmatrix}a_x(t) \\ a_y(t)\end{bmatrix}=
+\begin{bmatrix}
+\frac{1}{\sqrt {a_x^2(t) + a_y^2(t)}}* a_x(t)*\text{maxAccelXY}\\ 
+\frac{1}{\sqrt {a_x^2(t) + a_y^2(t)}}* a_y(t)*\text{maxAccelXY}
+\end{bmatrix}
+
+

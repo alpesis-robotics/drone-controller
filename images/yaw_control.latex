@@ -1,0 +1,18 @@
+\\
+\text{Yaw Rate:}\\
+\\
+\psi^{'} = k_p^{\psi} e(t) \\
+e(t) = [\psi_{\text{desired}}(t) - \psi(t)] \mod 2\pi 
+\\
+e(t) = e(t) - 2\pi \text{, if } e(t) > \pi\\ 
+e(t)= e(t) + 2\pi \text{, if } e(t) < -\pi
+\\
+\\
+\text{Notations:}\\
+e(t): \text{error of yaw}\\
+\psi: \text{yaw}\\
+\psi^{'}: \text{yaw rate}\\
+t: \text{time t}\\
+k_p^{\psi}: \text{yaw control gain}\\
+
+

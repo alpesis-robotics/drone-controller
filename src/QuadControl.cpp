@@ -224,9 +224,17 @@ V3F QuadControl::LateralPositionControl(V3F posCmd, V3F velCmd, V3F pos, V3F vel
   V3F accelCmd = accelCmdFF;
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
+  velCmd += kpPosXY * (posCmd - pos);
+  if (velCmd.mag() > maxSpeedXY)
+  {
+    velCmd = velCmd * maxSpeedXY / velCmd.mag();
+  }
 
-  
-
+  accelCmd += kpVelXY * (velCmd - vel);
+  if (accelCmd.mag() > maxAccelXY)
+  {
+    accelCmd = accelCmd * maxAccelXY / accelCmd.mag();
+  }
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   return accelCmd;
@@ -247,8 +255,12 @@ float QuadControl::YawControl(float yawCmd, float yaw)
 
   float yawRateCmd=0;
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
+  //float error = yawCmd - yaw;
+  //error = fmodf(error, 2.f * F_PI); 
+  //if (error > F_PI) { error -= 2.f * F_PI; }
+  //else if (error < -F_PI) { error += 2.f * F_PI; }
 
-
+  //yawRateCmd = kpYaw * error;
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   return yawRateCmd;

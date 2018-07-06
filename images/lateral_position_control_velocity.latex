@@ -1,0 +1,20 @@
+\\
+\text{Velocity:}\\
+\\
+\begin{bmatrix}v_x(t) \\ v_y(t)\end{bmatrix}=
+\begin{bmatrix}v_x(t-1) \\ v_y(t-1)\end{bmatrix} +
+k_p^{\text{posXY}}
+(
+\begin{bmatrix}\text{pos}_x^{\text{desired}}(t) \\ \text{pos}_y^{\text{desired}}(t)\end{bmatrix} -
+\begin{bmatrix}\text{pos}_x(t) \\ \text{pos}_y(t)\end{bmatrix}
+)
+\\
+\\\\
+\text{If} \sqrt {v_x^2(t) + v_y^2(t)} > \text{maxSpeedXY} \text{,}\\
+\begin{bmatrix}v_x(t) \\ v_y(t)\end{bmatrix}=
+\begin{bmatrix}
+\frac{1}{\sqrt {v_x^2(t) + v_y^2(t)}}* v_x(t)*\text{maxSpeedXY}\\ 
+\frac{1}{\sqrt {v_x^2(t) + v_y^2(t)}}* v_y(t)*\text{maxSpeedXY}
+\end{bmatrix}
+
+

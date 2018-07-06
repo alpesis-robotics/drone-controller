@@ -166,3 +166,8 @@ Completed the roll and pitch control function, and fine tuned the angle control 
 same time, the vehicle is flying away slowly. 
 
 ![2_AttitudeControl](./images/2_AttitudeControl.png)
+
+## Solution: Scenario 3_PositionControl
+
+### Implementation
+
