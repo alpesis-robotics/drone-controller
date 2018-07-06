@@ -1,0 +1,42 @@
+\\
+\text{The relation of the single rotor thrusts to the collective thrust and the body torques can
+be formulated as}
+\\
+
+\begin{bmatrix}M_x \\ M_y \\ M_z \\ F_c \end{bmatrix} =
+\begin{bmatrix}
+\frac{\sqrt 2}{2}L(F1 - F2 - F3 + F4) \\
+\frac{\sqrt 2}{2}L(-F1 - F2 + F3 + F4) \\
+k_d(F1 - F2 + F3 - F4) \\
+F1 + F2 + F3 + F4
+\end{bmatrix}
+
+\\
+\\\\
+\text{Solved F1, F2, F3, F4, the result is} \\
+\\
+\begin{bmatrix} F1 \\ F2\\ F3\\ F4\end{bmatrix}=\frac{1}{4}\begin{bmatrix} 
+d_p - d_q - d_r + Fc \\ 
+-d_p - d_q +d_r + Fc \\
+-d_p + d_q -d_r + Fc \\
+d_p + d_q +d_r + Fc \\
+\end{bmatrix}
+\\\\
+\text{Where}\\
+\begin{bmatrix}d_p \\d_q\\d_r\end{bmatrix}=
+\begin{bmatrix} 
+\frac{\sqrt 2 M_x}{L}\\
+\frac{\sqrt 2 M_y}{L}\\
+-\frac{M_z}{k_d}
+\end{bmatrix}
+\\
+\\\\
+\text{Notations:}\\\\
+
+F1 = \text{thrust rear left} \\
+F2 = \text{thrust rear right} \\
+F3 = \text{thrust front right} \\
+F4 = \text{thrust front left} \\
+F_c = \text{collective force} \\
+k_d = \text{ratio of drag torque and thrust}\\
+L = \text{arm length}

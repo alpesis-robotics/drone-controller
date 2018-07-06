@@ -1,0 +1,35 @@
+\\\text{Angular Velocity: }
+\\\\
+\begin{bmatrix}\omega_x \\ \omega_y\end{bmatrix} = 
+\frac{1}{R_{22}}
+\begin{bmatrix} 
+R_{10}&-R_{00} \\
+R_{11}&-R_{01} 
+\end{bmatrix}
+\begin{bmatrix} 
+k_p(\phi - R_{02}) \\
+k_p(\theta - R_{12})
+\end{bmatrix}
+\\\\
+\text{Where}
+\\\\
+\begin{bmatrix} \phi \\ \theta\end{bmatrix} =
+\begin{bmatrix} 
+\frac{-a_x m}{F_c} \\
+\frac{-a_y m}{F_c} 
+\end{bmatrix}\\
+\\
+R = \begin{bmatrix} 
+R_{00} & R_{01} & R_{02} \\
+R_{10} & R_{11} & R_{12} \\
+R_{20} & R_{21} & R_{22} 
+\end{bmatrix}
+\\\\
+\text{Notations:} \\
+\omega_x: \text{angular velocity (roll)} \\
+\omega_y: \text{angular velocity (pitch)} \\
+k_p: \text{angle control gain} \\
+R: \text{attitude rotation matrix IwrtB}\\
+F_c: \text{collective thrust}\\
+a: \text{acceleration}\\
+m: \text{mass}
