@@ -16,6 +16,10 @@ $ make -j8
 $ ./CPPSim
 ```
 
+## Control Process
+
+![quadcopter_control_process](./images/quadcopter_control_process.png)
+
 ## Solution: Scenario 1_Intro
 
 Tuning the parameter ``Mass`` in the ``config/QuadControlParams.txt``:
@@ -188,8 +192,9 @@ The desired horizontal acceleration, driven by the velocity at x axis and y axis
 
 **Altitude Control**
 
-The desired collective thrust, driven by the position and velocity at z axis, is integrating a
-PID controller as formulated as 
+The desired collective thrust, driven by the position and velocity at z axis, is formulated as
+below. Please note that you could apply (P + D) for PD controller for the scenario ``3_PositionControl``,
+or apply (P + D + I) for PID controller for ``4_Nonidealities``.
 
 ![equation](./images/altitude_control.gif)
 
@@ -228,11 +233,9 @@ Codes implemented in ``AltitudeControl()``:
 ```
    ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
    float posZError = posZCmd - posZ;
-   integratedAltitudeError += posZError * dt;
    float p = kpPosZ * posZError;
    float d = kpVelZ * (velZCmd - velZ) + velZ;
-   float i = KiPosZ * integratedAltitudeError;
-   float accel = (p + d + i + accelZCmd - CONST_GRAVITY) / R(2, 2);
+   float accel = (p + d + accelZCmd - CONST_GRAVITY) / R(2, 2);
    accel = CONSTRAIN(accel, -maxAscentRate / dt, maxAscentRate / dt);
    thrust = - mass * accel;
    /////////////////////////////// END STUDENT CODE ////////////////////////////
@@ -311,3 +314,24 @@ PASS: ABS(Quad2.Yaw) was less than 0.100000 for at least 1.000000 seconds
 The graph is illustrated as
 
 ![3_PositionControl](./images/3_PositionControl.png)
+
+## Solution: 4_Nonidealities
+
+### Implementation
+
+Update ``AltitudeControl()`` by adding basic integral control:
+
+```
+   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
+   float posZError = posZCmd - posZ;
+   integratedAltitudeError += posZError * dt;
+   float p = kpPosZ * posZError;
+   float d = kpVelZ * (velZCmd - velZ) + velZ;
+   float i = KiPosZ * integratedAltitudeError;
+   float accel = (p + d + i + accelZCmd - CONST_GRAVITY) / R(2, 2);
+   accel = CONSTRAIN(accel, -maxAscentRate / dt, maxAscentRate / dt);
+   thrust = - mass * accel;
+   /////////////////////////////// END STUDENT CODE ////////////////////////////
+```
+
+## Solution: 5_TrajectoryFollow
