@@ -57,6 +57,8 @@ each rotor, resolve the desired force for each single rotor by the equations as
 
 Solving the ``momentCmd`` by the formulas as:
 
+![equation](./images/body_rate_control.gif)
+
 **Roll Pitch Control**
 
 In order to get the angular velocity of roll and pitch, it needs the rotation matrix from
