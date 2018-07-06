@@ -169,7 +169,18 @@ same time, the vehicle is flying away slowly.
 
 ## Solution: Scenario 3_PositionControl
 
+Position control is concerning on three parts:
+
+- lateral position control: calculating the desired horizontal acceleration based on
+desired lateral position, velocity, acceleration and current post;
+- altitude control: calculating the desired quadrocopter thrust based on altitude setpoint,
+actual altitude, vertical velocity setpoint, actual vertical velocity and a vertical
+acceleration feed-forward command;
+- yaw control: calculating the desired yaw rate to control yaw to yawCmd.
+
 **Lateral Position Control**
+
+The desired horizontal acceleration, driven by the velocity at x axis and y axis, is denoted as
 
 ![equation](./images/lateral_position_control_velocity.gif)
 
@@ -177,19 +188,37 @@ same time, the vehicle is flying away slowly.
 
 **Altitude Control**
 
+The desired collective thrust, driven by the position and velocity at z axis, is integrating a
+PID controller as formulated as 
+
 ![equation](./images/altitude_control.gif)
 
 **Yaw Control**
+
+The desired yaw rate, concerted from yaw command, is calculated as following:
 
 ![equation](./images/yaw_control.gif)
 
 ### Implementation
 
-**Lateral PositionControl**
+**Lateral Position Control**
 
 Codes implemented in ``LateralPositionControl()``:
 
 ```
+   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
+   velCmd += kpPosXY * (posCmd - pos);
+   if (velCmd.mag() > maxSpeedXY)
+   {
+     velCmd = velCmd * maxSpeedXY / velCmd.mag();
+   }
+
+   accelCmd += kpVelXY * (velCmd - vel);
+   if (accelCmd.mag() > maxAccelXY)
+   {
+     accelCmd = accelCmd * maxAccelXY / accelCmd.mag();
+   }
+   /////////////////////////////// END STUDENT CODE ////////////////////////////
 ```
 
 **Altitude Control**
@@ -197,6 +226,16 @@ Codes implemented in ``LateralPositionControl()``:
 Codes implemented in ``AltitudeControl()``:
 
 ```
+   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
+   float posZError = posZCmd - posZ;
+   integratedAltitudeError += posZError * dt;
+   float p = kpPosZ * posZError;
+   float d = kpVelZ * (velZCmd - velZ) + velZ;
+   float i = KiPosZ * integratedAltitudeError;
+   float accel = (p + d + i + accelZCmd - CONST_GRAVITY) / R(2, 2);
+   accel = CONSTRAIN(accel, -maxAscentRate / dt, maxAscentRate / dt);
+   thrust = - mass * accel;
+   /////////////////////////////// END STUDENT CODE ////////////////////////////
 ```
 
 Tuning the parameters ``kpPosXY``, ``kpPosZ``, ``kpVelXY``, ``kpVelZ`` in ``config/QuadControlParams.txt``:
@@ -220,6 +259,9 @@ PASS: ABS(Quad2.Pos.X) was less than 0.100000 for at least 1.250000 seconds
 FAIL: ABS(Quad2.Yaw) was less than 0.100000 for 0.000000 seconds, which was less than 1.000000 seconds
 ```
 
+At this level, as the chart illustrated below, the quadrocopter is going to the destination points and 
+tracking error.
+
 ![3_PositionControl_step1](./images/3_PositionControl_step1.png)
 
 **Yaw Control**
@@ -227,12 +269,34 @@ FAIL: ABS(Quad2.Yaw) was less than 0.100000 for 0.000000 seconds, which was less
 Codes implemented in ``YawControl()``:
 
 ```
+   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
+   float error = yawCmd - yaw;
+   error = fmodf(error, 2.f * F_PI);
+   if (error > F_PI) { error -= 2.f * F_PI; }
+   else if (error < -F_PI) { error += 2.f * F_PI; }
 
+   yawRateCmd = kpYaw * error;
+   /////////////////////////////// END STUDENT CODE ////////////////////////////
 ```
 
-Tuning the parameters
+Tuning the parameters ``kpYaw`` and the 3rd value of ``kpPQR`` in ``config/QuadControl.txt``:
 
 ```
+# Position control gains
+kpPosXY = 4
+kpPosZ = 4
+KiPosZ = 20
+
+# Velocity control gains
+kpVelXY = 16
+kpVelZ = 16
+
+# Angle control gains
+kpBank = 10
+kpYaw = 2
+
+# Angle rate gains
+kpPQR = 92, 92, 40
 ```
 
 Run the result:
@@ -243,5 +307,7 @@ PASS: ABS(Quad1.Pos.X) was less than 0.100000 for at least 1.250000 seconds
 PASS: ABS(Quad2.Pos.X) was less than 0.100000 for at least 1.250000 seconds
 PASS: ABS(Quad2.Yaw) was less than 0.100000 for at least 1.000000 seconds
 ```
+
+The graph is illustrated as
 
 ![3_PositionControl](./images/3_PositionControl.png)
