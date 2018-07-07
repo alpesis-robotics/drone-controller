@@ -322,7 +322,7 @@ The graph is illustrated as
 
 ## Solution: 4_Nonidealities
 
-Before tuning the parameters, let's recap the parameters applied on each control functions.
+Before tuning the parameters, let's recap the parameters applied on each control function.
 
 **Altitude Control**
 
@@ -414,4 +414,3 @@ Update ``AltitudeControl()`` by adding basic integral control:
    /////////////////////////////// END STUDENT CODE ////////////////////////////
 ```
 
-## Solution: 5_TrajectoryFollow
