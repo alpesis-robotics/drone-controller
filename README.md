@@ -318,7 +318,7 @@ PASS: ABS(Quad2.Yaw) was less than 0.100000 for at least 1.000000 seconds
 
 The graph is illustrated as
 
-![3_PositionControl](./images/3_PositionControl.png)
+![3_PositionControl](./images/3_PositionControl.gif)
 
 ## Solution: 4_Nonidealities
 
