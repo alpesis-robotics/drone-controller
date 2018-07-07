@@ -18,6 +18,11 @@ $ ./CPPSim
 
 ## Control Process
 
+In the control process, it could be devided into two parts:
+
+- Attitude control: including motor control, body rate control and roll pitch control;
+- Position control: including yaw control, altitude control and lateral position control.
+
 ![quadcopter_control_process](./images/quadcopter_control_process.png)
 
 ## Solution: Scenario 1_Intro
