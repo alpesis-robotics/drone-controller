@@ -241,7 +241,7 @@ Codes implemented in ``AltitudeControl()``:
    float p = kpPosZ * posZError;
    float d = kpVelZ * (velZCmd - velZ) + velZ;
    float accel = (p + d + accelZCmd - CONST_GRAVITY) / R(2, 2);
-   accel = CONSTRAIN(accel, -maxAscentRate / dt, maxAscentRate / dt);
+   accel = CONSTRAIN(accel, -maxAscentRate / dt, maxDescentRate / dt);
    thrust = - mass * accel;
    /////////////////////////////// END STUDENT CODE ////////////////////////////
 ```
@@ -322,6 +322,81 @@ The graph is illustrated as
 
 ## Solution: 4_Nonidealities
 
+Before tuning the parameters, let's recap the parameters applied on each control functions.
+
+**Altitude Control**
+
+Position and velocity control gains at z axis for PID control.
+
+```
+# Physical properties
+minMotorThrust = .1
+maxMotorThrust = 4.5
+
+# Position control gains
+kpPosZ = 4
+KiPosZ = 20
+
+# Velocity control gains
+kpVelZ = 16
+
+# limits
+maxAscentRate = 5
+maxDescentRate = 2
+```
+
+**Lateral Position Control**
+
+```
+# Position control gains
+kpPosXY = 4
+
+# Velocity control gains
+kpVelXY = 16
+
+# limits
+maxSpeedXY = 5
+maxHorizAccel = 12    # maxAccelXY
+```
+
+**Roll Pitch Control**
+
+```
+# Angle control gains
+kpBank = 10
+
+# limits
+maxTiltAngle = .7
+```
+
+**Yaw Control**
+
+```
+# Angle control gains
+kpYaw = 2
+```
+
+**Body Rate Control**
+
+```
+# Physical properties
+Ixx = 0.0023
+Iyy = 0.0023
+Izz = 0.0046
+
+# Angle rate gains
+kpPQR = 92, 92, 40
+```
+
+**Motor Control**
+
+```
+# Physical properties
+Mass = 0.5
+L = 0.17
+kappa = 0.016
+```
+
 ### Implementation
 
 Update ``AltitudeControl()`` by adding basic integral control:
@@ -334,7 +409,7 @@ Update ``AltitudeControl()`` by adding basic integral control:
    float d = kpVelZ * (velZCmd - velZ) + velZ;
    float i = KiPosZ * integratedAltitudeError;
    float accel = (p + d + i + accelZCmd - CONST_GRAVITY) / R(2, 2);
-   accel = CONSTRAIN(accel, -maxAscentRate / dt, maxAscentRate / dt);
+   accel = CONSTRAIN(accel, -maxAscentRate / dt, maxDescentRate / dt);
    thrust = - mass * accel;
    /////////////////////////////// END STUDENT CODE ////////////////////////////
 ```
