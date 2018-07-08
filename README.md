@@ -197,11 +197,10 @@ The desired horizontal acceleration, driven by the velocity at x axis and y axis
 
 **Altitude Control**
 
-The desired collective thrust, driven by the position and velocity at z axis, is formulated as
-below. Please note that you could apply (P + D) for PD controller for the scenario ``3_PositionControl``,
-or apply (P + D + I) for PID controller for ``4_Nonidealities``.
+The desired collective thrust, driven by the velocity and accceleration at z axis, applying PD controller,
+is denoted as below.
 
-![equation](./images/altitude_control.gif)
+![equation](./images/altitude_control_pd.gif)
 
 **Yaw Control**
 

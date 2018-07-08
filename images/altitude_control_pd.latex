@@ -1,0 +1,23 @@
+\\
+F = -ma = - m \frac{(P + D) - g}{R_{22}}
+\\
+P = k_p^{\text{velZ}}(v_z^{\text{desired}} - v_z)
+\\
+D = a_z^{\text{desired}}
+\\
+R = \begin{bmatrix}
+R_{00} & R_{01} & R_{02} \\
+R_{10} & R_{11} & R_{12} \\
+R_{20} & R_{21} & R_{22}
+\end{bmatrix}
+\\\\
+\text{Notations:}\\
+F: \text{thrust}\\
+m: \text{mass}\\
+g: \text{gravity}\\
+a: \text{acceleration}\\
+v: \text{velocity}\\
+R: \text{rotation matrix of estimated attitude} \\
+P: \text{P controller}\\
+D: \text{D controller}\\
+k_p^{\text{velZ}}: \text{velocity proportional control gain at z axis}
