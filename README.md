@@ -318,11 +318,26 @@ The graph is illustrated as
 
 ## Solution: 4_Nonidealities
 
+Since the mass of the three quadcopters are different, the linearity model could not make
+the drones arrive at the parallel align directions. Introducing PID controller into altitude
+control and modeling with non-linearity function would be helpful.
+
+**Altitude Control**
+
+With integral controller integration, here is the formula applying PID control on altitude
+calculation.
+
 ![equation](./images/altitude_control_pid.gif)
 
-Before tuning the parameters, let's recap the parameters applied on each control function.
+As the non-linearity function being introduced, the parameters should be adjusted to adapte
+the formula. Let's go over all parameters related as shown below.
 
 ![control_parameters](./images/control_parameters.png)
+
+From the graph, we know that when the mass changes, altitude control would be affected; since
+the altitude control is modelled with non-linearity, we have to take the balance of ``kpPosZ``,
+``kpVelZ``, ``KiPosZ`` that is related to the altitude, as well as the balance of angular parameters
+that would be impacted.
 
 ### Implementation
 
@@ -341,6 +356,26 @@ Update ``AltitudeControl()`` by adding basic integral control:
    float desAccel = (P + I + D) - CONST_GRAVITY;
    thrust = - mass * desAccel / R(2, 2);
    /////////////////////////////// END STUDENT CODE ////////////////////////////
+```
+
+Tunning the parameters as
+
+```
+# Position control gains
+kpPosXY = 3
+kpPosZ = 10
+KiPosZ = 40
+
+# Velocity control gains
+kpVelXY = 8
+kpVelZ = 8
+
+# Angle control gains
+kpBank = 12
+kpYaw = 4
+
+# Angle rate gains
+kpPQR = 70, 70, 20
 ```
 
 Run the result:
