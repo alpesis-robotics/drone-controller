@@ -237,12 +237,9 @@ Codes implemented in ``AltitudeControl()``:
 
 ```
    ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-   float posZError = posZCmd - posZ;
-   float p = kpPosZ * posZError;
-   float d = kpVelZ * (velZCmd - velZ) + velZ;
-   float accel = (p + d + accelZCmd - CONST_GRAVITY) / R(2, 2);
-   accel = CONSTRAIN(accel, -maxAscentRate / dt, maxDescentRate / dt);
-   thrust = - mass * accel;
+   velZCmd = CONSTRAIN(velZCmd, -maxAscentRate, maxDescentRate);
+   float desAccel = kpVelZ * (velZCmd - velZ) + accelZCmd - CONST_GRAVITY;
+   thrust = - mass * (desAccel / R(2, 2));
    /////////////////////////////// END STUDENT CODE ////////////////////////////
 ```
 
@@ -254,8 +251,8 @@ kpPosXY = 4
 kpPosZ = 4
 
 # Velocity control gains
-kpVelXY = 8
-kpVelZ = 8
+kpVelXY = 16
+kpVelZ = 16
 ```
 
 Run the result:

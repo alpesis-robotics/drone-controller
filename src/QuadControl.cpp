@@ -186,14 +186,9 @@ float QuadControl::AltitudeControl(float posZCmd, float velZCmd, float posZ, flo
   float thrust = 0;
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-  float posZError = posZCmd - posZ;  
-  integratedAltitudeError += posZError * dt;
-  float p = kpPosZ * posZError;
-  float d = kpVelZ * (velZCmd - velZ) + velZ;
-  float i = KiPosZ * integratedAltitudeError;
-  float accel = (p + d + i + accelZCmd - CONST_GRAVITY) / R(2, 2);
-  accel = CONSTRAIN(accel, -maxAscentRate / dt, maxDescentRate / dt);
-  thrust = - mass * accel;
+  velZCmd = CONSTRAIN(velZCmd, -maxAscentRate, maxDescentRate);
+  float desAccel = kpVelZ * (velZCmd - velZ) + accelZCmd - CONST_GRAVITY;
+  thrust = - mass * (desAccel / R(2, 2));  
   /////////////////////////////// END STUDENT CODE ////////////////////////////
   
   return thrust;
@@ -260,12 +255,12 @@ float QuadControl::YawControl(float yawCmd, float yaw)
 
   float yawRateCmd=0;
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-  float error = yawCmd - yaw;
-  error = fmodf(error, 2.f * F_PI); 
-  if (error > F_PI) { error -= 2.f * F_PI; }
-  else if (error < -F_PI) { error += 2.f * F_PI; }
+  //float error = yawCmd - yaw;
+  //error = fmodf(error, 2.f * F_PI); 
+  //if (error > F_PI) { error -= 2.f * F_PI; }
+  //else if (error < -F_PI) { error += 2.f * F_PI; }
 
-  yawRateCmd = kpYaw * error;
+  //yawRateCmd = kpYaw * error;
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   return yawRateCmd;
