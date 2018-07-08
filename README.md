@@ -332,12 +332,14 @@ Update ``AltitudeControl()`` by adding basic integral control:
    ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
    float posZError = posZCmd - posZ;
    integratedAltitudeError += posZError * dt;
-   float p = kpPosZ * posZError;
-   float d = kpVelZ * (velZCmd - velZ) + velZ;
-   float i = KiPosZ * integratedAltitudeError;
-   float accel = (p + d + i + accelZCmd - CONST_GRAVITY) / R(2, 2);
-   accel = CONSTRAIN(accel, -maxAscentRate / dt, maxDescentRate / dt);
-   thrust = - mass * accel;
+
+   velZCmd = kpPosZ * posZError + velZCmd;
+   velZCmd = CONSTRAIN(velZCmd, -maxAscentRate, maxDescentRate);
+   float P = kpVelZ * (velZCmd - velZ);
+   float I = KiPosZ * integratedAltitudeError;
+   float D = accelZCmd;
+   float desAccel = (P + I + D) - CONST_GRAVITY;
+   thrust = - mass * desAccel / R(2, 2);
    /////////////////////////////// END STUDENT CODE ////////////////////////////
 ```
 
