@@ -395,3 +395,63 @@ PASS: ABS(Quad3.PosFollowErr) was less than 0.100000 for at least 1.500000 secon
 The chart shows as
 
 ![4_Nonidealities](./images/4_Nonidealities.png)
+
+## Solution: Scenario 5_TrajectoryFollow
+
+
+
+**Parameter Tunning**
+
+Generating a new trajectory, run the result, perhaps the current parameters could not fit the expected
+route right now. Here are some tunning techniques could be followed:
+
+- if the quadcopter take off and jump too high, tune the z values like ``kpPosZ``, ``kpVelZ`` and ``KiPosZ``;
+- if the quadcopter fly too near or too far at the horizon, tune ``kpPosXY``, ``kpVelXY``;
+- if the quadcopter turn the corner unexpectly, tune the angular parameters like ``kpBank``, ``kpYaw`` and ``kpPQR``.
+
+### Implementation
+
+
+Generating a new trajectory in ``config/traj/MakePeriodicTrajectory.py``:
+
+```
+	######## BEGIN STUDENT CODE
+        vx = (x - px) / timestep;
+        vy = (y - py) / timestep;
+        vz = (z - pz) / timestep;
+        px = x;
+        py = y;
+        pz = z;
+        ######## END STUDENT CODE
+```
+
+Fine tuning the parameters again:
+
+```
+# Position control gains
+kpPosXY = 3
+kpPosZ = 5
+KiPosZ = 16
+
+# Velocity control gains
+kpVelXY = 10
+kpVelZ = 10
+
+# Angle control gains
+kpBank = 12
+kpYaw = 4
+
+# Angle rate gains
+kpPQR = 60, 60, 15
+```
+
+Run the result:
+
+```
+Simulation #3 (../config/5_TrajectoryFollow.txt)
+PASS: ABS(Quad2.PosFollowErr) was less than 0.250000 for at least 3.000000 seconds
+```
+
+The graph is illustrated as
+
+![5_TrajectoryFollow](./images/5_TrajectoryFollow.png)
