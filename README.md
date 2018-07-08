@@ -399,11 +399,51 @@ The chart shows as
 ## Solution: Scenario 5_TrajectoryFollow
 
 As waypoints define the path the drone could fly, we could generate the waypoints as expected for the
-simulation. The format of the waypoints could be stored as txt format with the data attributes as
+simulation. As the trajectory point defined in ``VehicleDatatypes.h``, we could generate the trajectory
+data by various of mathematical algorithms.
+
+Traject Point defined in ``VehicleDatatypes.h``
 
 ```
-time,x,y,z,vx,vy,vz
+// Struct for holding all of the data related to a single trajectory point
+struct TrajectoryPoint {
+  float time;
+  V3F position;
+  V3F velocity;
+  V3F omega;
+  V3F accel;
+  Quaternion<float> attitude;
+ 
+  // Initialise all fields to zero when declared
+  TrajectoryPoint() :
+    time(0.f),
+    position(0.f, 0.f, 0.f),
+    velocity(0.f, 0.f, 0.f),
+    omega(0.f, 0.f, 0.f),
+    attitude(0.f, 0.f, 0.f, 0.f)
+  {
+  }
+};
 ```
+
+Trajectory data with txt format:
+
+```
+# full data
+time,x,y,z,vx,vy,vz,wx,wy,wz,tw,tx,ty,tz
+
+# pos
+time,x,y,z
+
+# pos + velocity
+time,x,y,z,vx,vy,vz
+
+# ps + velocity + angular velocity
+time,x,y,z,vx,vy,vz,wx,wy,wz
+```
+
+The specific details provided, the accuracy of the trajectory will be generated, expected, and customized.
+
 
 **Parameter Tunning**
 
