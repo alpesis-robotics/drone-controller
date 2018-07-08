@@ -254,8 +254,8 @@ kpPosXY = 4
 kpPosZ = 4
 
 # Velocity control gains
- kpVelXY = 8
- kpVelZ = 8
+kpVelXY = 8
+kpVelZ = 8
 ```
 
 Run the result:
@@ -324,78 +324,7 @@ The graph is illustrated as
 
 Before tuning the parameters, let's recap the parameters applied on each control function.
 
-**Altitude Control**
-
-Position and velocity control gains at z axis for PID control.
-
-```
-# Physical properties
-minMotorThrust = .1
-maxMotorThrust = 4.5
-
-# Position control gains
-kpPosZ = 4
-KiPosZ = 20
-
-# Velocity control gains
-kpVelZ = 16
-
-# limits
-maxAscentRate = 5
-maxDescentRate = 2
-```
-
-**Lateral Position Control**
-
-```
-# Position control gains
-kpPosXY = 4
-
-# Velocity control gains
-kpVelXY = 16
-
-# limits
-maxSpeedXY = 5
-maxHorizAccel = 12    # maxAccelXY
-```
-
-**Roll Pitch Control**
-
-```
-# Angle control gains
-kpBank = 10
-
-# limits
-maxTiltAngle = .7
-```
-
-**Yaw Control**
-
-```
-# Angle control gains
-kpYaw = 2
-```
-
-**Body Rate Control**
-
-```
-# Physical properties
-Ixx = 0.0023
-Iyy = 0.0023
-Izz = 0.0046
-
-# Angle rate gains
-kpPQR = 92, 92, 40
-```
-
-**Motor Control**
-
-```
-# Physical properties
-Mass = 0.5
-L = 0.17
-kappa = 0.016
-```
+![control_parameters](./images/control_parameters.png)
 
 ### Implementation
 
