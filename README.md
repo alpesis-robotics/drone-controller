@@ -318,6 +318,8 @@ The graph is illustrated as
 
 ## Solution: 4_Nonidealities
 
+![equation](./images/altitude_control_pid.gif)
+
 Before tuning the parameters, let's recap the parameters applied on each control function.
 
 ![control_parameters](./images/control_parameters.png)
@@ -339,3 +341,15 @@ Update ``AltitudeControl()`` by adding basic integral control:
    /////////////////////////////// END STUDENT CODE ////////////////////////////
 ```
 
+Run the result:
+
+```
+Simulation #86 (../config/4_Nonidealities.txt)
+PASS: ABS(Quad1.PosFollowErr) was less than 0.100000 for at least 1.500000 seconds
+PASS: ABS(Quad2.PosFollowErr) was less than 0.100000 for at least 1.500000 seconds
+PASS: ABS(Quad3.PosFollowErr) was less than 0.100000 for at least 1.500000 seconds
+```
+
+The chart shows as
+
+![4_Nonidealities](./images/4_Nonidealities.png)

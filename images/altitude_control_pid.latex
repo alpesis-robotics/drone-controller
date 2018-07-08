@@ -1,20 +1,18 @@
 \\
-F = -ma, (-\frac{\text{maxAscentRate}}{\Delta t} < a < \frac{\text{maxAscentRate}}{\Delta t} )
+\text{Altitude Control with PID:}\\
 \\
-a = \frac{(P + D + I) - a_z - g}{R_{22}}
+F = -ma = - m \frac{(P + I + D) - g}{R_{22}}
 \\
-P = k_p^{\text{posZ}}(p_z^{\text{desired}} - p_z)
+P = k_p^{\text{velZ}}((k_p^{\text{posZ}} (p_z^{\text{desired}} - p_z) + v_z^{\text{desired}}) - v_z)
 \\
-D = k_p^{\text{velZ}}(v_z^{\text{desired}} - v_z) + v_z
+I = \int k_i^{\text{posZ}} [(p_z^{\text{desired}} - p_z) \Delta t]
 \\
-I = k_i^{\text{posZ}} e_i
+D = a_z^{\text{desired}}
 \\
-e_i = \int (p_z^{\text{desired}} - p_z)\Delta t
-\\
-R = \begin{bmatrix} 
+R = \begin{bmatrix}
 R_{00} & R_{01} & R_{02} \\
 R_{10} & R_{11} & R_{12} \\
-R_{20} & R_{21} & R_{22} 
+R_{20} & R_{21} & R_{22}
 \end{bmatrix}
 \\\\
 \text{Notations:}\\
@@ -23,12 +21,9 @@ m: \text{mass}\\
 g: \text{gravity}\\
 a: \text{acceleration}\\
 v: \text{velocity}\\
+p: \text{position}\\
 R: \text{rotation matrix of estimated attitude} \\
 P: \text{P controller}\\
 D: \text{D controller}\\
-I: \text{I controller}\\
-k_p^{\text{posZ}}: \text{position proportional control gain at z axis}\\
 k_p^{\text{velZ}}: \text{velocity proportional control gain at z axis}\\
-k_i^{\text{posZ}}: \text{position integral control gain}\\
-e_i: \text{integrated error}\\
-p_z: \text{z position}\\
+k_p^{\text{posZ}}: \text{position proportional control gain at z axis}
