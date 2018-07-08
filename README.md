@@ -358,7 +358,12 @@ Update ``AltitudeControl()`` by adding basic integral control:
    /////////////////////////////// END STUDENT CODE ////////////////////////////
 ```
 
-Tunning the parameters as
+Since the red quadcopter is heavier than usual, increase ``kpPosZ`` would make the red quad up
+to the expected position. Fine tune all parameters as provided below.
+
+NOTE: Once the nonliearity model works at scenario 4_Nonidealities, come back to other scenarios
+to check if the new parameters work well for the rest. Make sure the parameters could pass all
+tests at each scenario.
 
 ```
 # Position control gains
