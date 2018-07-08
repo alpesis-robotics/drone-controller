@@ -398,7 +398,12 @@ The chart shows as
 
 ## Solution: Scenario 5_TrajectoryFollow
 
+As waypoints define the path the drone could fly, we could generate the waypoints as expected for the
+simulation. The format of the waypoints could be stored as txt format with the data attributes as
 
+```
+time,x,y,z,vx,vy,vz
+```
 
 **Parameter Tunning**
 
@@ -411,6 +416,16 @@ route right now. Here are some tunning techniques could be followed:
 
 ### Implementation
 
+
+**Position and Velocity**
+
+If both drones are flying with the same waypoints but have different velocity, as we see from the picture,
+one is at the right yellow dot, another one is fall behind.
+
+![5_TrajectoryFollow_step1](./images/5_TrajectoryFollow_step1.png)
+
+
+**Trajectory Generation**
 
 Generating a new trajectory in ``config/traj/MakePeriodicTrajectory.py``:
 
